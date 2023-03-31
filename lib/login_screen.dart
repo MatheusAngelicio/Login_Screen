@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:rive/rive.dart';
-
 import 'compoments/space.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,90 +10,135 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  StateMachineController? controller;
+
+  SMIInput<bool>? isChecking;
+  SMIInput<bool>? isHandsUp;
+  SMIInput<bool>? trigSuccess;
+  SMIInput<bool>? trigFail;
+//
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
-        body: SizedBox(
-      width: size.width,
-      height: size.height,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: size.width,
-              height: 200,
-              child: RiveAnimation.asset(
-                "images/animated_login_character.riv",
-              ),
-            ),
-            Space(),
-            TextField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                hintText: "E-mail",
-                prefixIcon: Icon(Icons.mail),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-            Space(),
-            TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: "Password",
-                prefixIcon: Icon(Icons.lock),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: SizedBox(
+      backgroundColor: Color(0xffD6E2EA),
+      body: SizedBox(
+        width: size.width,
+        height: size.height,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
                 width: size.width,
-                child: const Text(
-                  "Forgot your password?",
-                  textAlign: TextAlign.right,
-                  style: TextStyle(decoration: TextDecoration.underline),
+                height: 200,
+                child: RiveAnimation.asset(
+                  "images/animated_login_character.riv",
+                  stateMachines: const ["Login Machine"],
+                  onInit: (artboard) {
+                    controller = StateMachineController.fromArtboard(
+                        artboard, "Login Machine");
+                    if (controller == null) return;
+
+                    artboard.addController(controller!);
+                    isChecking = controller?.findInput("isChecking");
+                    isHandsUp = controller?.findInput("isHandsUp");
+                    trigSuccess = controller?.findInput("trigSuccess");
+                    trigFail = controller?.findInput("trigFail");
+                  },
                 ),
               ),
-            ),
-            Space(),
-            MaterialButton(
-              minWidth: size.width,
-              height: 50,
-              color: Colors.purple,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)),
-              onPressed: () {},
-              child: const Text(
-                "Login",
-                style: TextStyle(color: Colors.white),
+              const SizedBox(height: 10),
+              TextField(
+                onChanged: (value) {
+                  if (isHandsUp != null) {
+                    isHandsUp!.change(false);
+                  }
+
+                  if (isChecking != null) {
+                    isChecking!.change(true);
+                  }
+                },
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  hintText: "E mail",
+                  prefixIcon: const Icon(Icons.mail),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(
-              width: size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Don't you have an account?"),
-                  TextButton(
+              const SizedBox(height: 10),
+              TextField(
+                onChanged: (value) {
+                  if (isChecking != null) {
+                    isChecking!.change(false);
+                  }
+                  if (isHandsUp != null) {
+                    isHandsUp!.change(true);
+                  }
+                },
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: "Password",
+                  prefixIcon: const Icon(Icons.lock),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              Space(),
+              SizedBox(
+                width: size.width,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
                     onPressed: () {},
-                    child: Text(
-                      "Register",
-                      style: TextStyle(color: Colors.black),
+                    child: const Text(
+                      "Forgot your password?",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Colors.black),
                     ),
                   ),
-                ],
+                ),
               ),
-            )
-          ],
+              Space(),
+              MaterialButton(
+                minWidth: size.width,
+                height: 50,
+                color: Colors.purple,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
+                onPressed: () {},
+                child: const Text(
+                  "Login",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              Space(),
+              SizedBox(
+                width: size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Don't you have an account?"),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        "Register",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }
