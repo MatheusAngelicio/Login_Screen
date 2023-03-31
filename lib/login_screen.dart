@@ -3,6 +3,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:rive/rive.dart';
 
+import 'compoments/space.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -30,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 "images/animated_login_character.riv",
               ),
             ),
-            const SizedBox(height: 10),
+            Space(),
             TextField(
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
@@ -41,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            Space(),
             TextField(
               obscureText: true,
               decoration: InputDecoration(
@@ -59,7 +61,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 textAlign: TextAlign.right,
                 style: TextStyle(decoration: TextDecoration.underline),
               ),
-            )
+            ),
+            Space(),
           ],
         ),
       ),
