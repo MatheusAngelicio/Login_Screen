@@ -1,16 +1,10 @@
-# login_screen
+# Login Screen
 
-A new Flutter project.
+<div style="display:flex;">
+<img width="390" alt="Screenshot 2023-03-31 at 14 04 55" src="https://user-images.githubusercontent.com/54027680/229184929-8a140563-cf68-4db8-a0e2-40c5ab664cdf.png">
+    <img width="391" alt="Screenshot 2023-03-31 at 14 05 15" src="https://user-images.githubusercontent.com/54027680/229184963-1988f8ba-b621-4ab3-bebf-1951861acae7.png">
+</div>
 
-## Getting Started
+## 🚀 Login with Animation
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
