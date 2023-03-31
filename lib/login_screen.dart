@@ -54,15 +54,46 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            SizedBox(
-              width: size.width,
-              child: const Text(
-                "Forgot your password?",
-                textAlign: TextAlign.right,
-                style: TextStyle(decoration: TextDecoration.underline),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SizedBox(
+                width: size.width,
+                child: const Text(
+                  "Forgot your password?",
+                  textAlign: TextAlign.right,
+                  style: TextStyle(decoration: TextDecoration.underline),
+                ),
               ),
             ),
             Space(),
+            MaterialButton(
+              minWidth: size.width,
+              height: 50,
+              color: Colors.purple,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
+              onPressed: () {},
+              child: const Text(
+                "Login",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            SizedBox(
+              width: size.width,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Don't you have an account?"),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Register",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
